@@ -1,0 +1,42 @@
+{
+  "repository": {},
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "brunch build --production && webpack --mode production",
+    "watch": "brunch watch --stdin",
+    "webpack_watch": "webpack --mode development --watch-stdin",
+    "test": "jest"
+  },
+  "dependencies": {
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.2",
+    "brunch": "^2.10.17",
+    "clean-css-brunch": "2.10.0",
+    "jest": "^23.6.0",
+    "sass": "^1.13.1",
+    "webpack": "^4.18.0",
+    "webpack-cli": "^3.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-react": "^7.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  }
+}

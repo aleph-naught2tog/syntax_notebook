@@ -1,0 +1,4 @@
+cd $phoenix_dir
+./assets/node_modules/sass/sass.js ./assets/scss:./assets/css
+npm --prefix ./assets run deploy
+mix "${phoenix_ex}.digest"
