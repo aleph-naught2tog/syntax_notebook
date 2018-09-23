@@ -30,6 +30,7 @@ module.exports = function (env) {
       path: path.resolve(__dirname, OUTPUT_SCRIPT_FOLDER),
       publicPath: '/'
     },
+
     module: {
       rules: [
         { test: /\.[tj]sx?$/, loader: 'ts-loader' }
@@ -38,7 +39,7 @@ module.exports = function (env) {
 
     resolve: {
       modules: ['node_modules', path.resolve(__dirname, INPUT_SCRIPT_FOLDER)],
-      extensions: ['.js', '.jsx', '.tsx']
+      extensions: ['.js', '.jsx', '.tsx', '.ts']
     }
   };
 };

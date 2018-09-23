@@ -21,6 +21,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/jest": "^23.3.2",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
     "babel-cli": "^6.26.0",
@@ -39,6 +40,10 @@
   },
   "jest": {
     "verbose": true,
+    "testMatch": [
+      "**/__tests__/**/*.[tj]s?(x)",
+      "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
@@ -46,7 +51,12 @@
       "tsx"
     ],
     "transform": {
-      "^.+[^d]\\.(ts|tsx)$": "ts-jest"
+      "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
     }
   }
 }
