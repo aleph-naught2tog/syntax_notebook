@@ -31,7 +31,7 @@
       </main>
 
     </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <%= render_existing @view_module, "scripts.html", assigns %>
+    <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
+    <%= render_script(@view_module, assigns) %>
   </body>
 </html>

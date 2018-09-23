@@ -1,57 +1,60 @@
 // <project_root>/assets/webpack.config.js
 const path = require('path');
-const fs = require('fs');
+
+const INPUT_SCRIPT_FOLDER = 'javascript';
+const OUTPUT_SCRIPT_FOLDER = '../priv/static/js';
 
 // This should mirror your view folders
 // e.g., fresh install of Phoenix should give:
 const views = [
-    'layout',
-    'page'
+  {name: 'layout', type: 'js'},
+  {name: 'page', type: 'js'}
 ];
 
 const ENTRY_POINTS = {
-    app: './js/app.js'
+  app: `./${INPUT_SCRIPT_FOLDER}/app.js`
 };
 
-const dynamicEntryPoints = views.reduce((entryPointsSoFar, currentView) => {
-    entryPointsSoFar[currentView] = path.resolve(__dirname, `./js/${currentView}/index.js`);
-    return entryPointsSoFar;
+const dynamicEntryPoints = views.reduce((entryPointsSoFar, {name, type}) => {
+  const desiredPath = `./${INPUT_SCRIPT_FOLDER}/${name}/index.${type}`;
+  entryPointsSoFar[name] = path.resolve(__dirname, desiredPath);
+  return entryPointsSoFar;
 }, ENTRY_POINTS);
 
 module.exports = function (env) {
-    return {
-        devtool: 'cheap-module-source-map',
-        entry: dynamicEntryPoints,
-        output: {
-            filename: '[name].js',
-            path: path.resolve(__dirname, '../priv/static/js'),
-            publicPath: '/'
-        },
-        module: {
-            rules: [
-                {
-                    // .js or .jsx
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: ['@babel/preset-env', '@babel/preset-react'],
-                                plugins: [
-                                    '@babel/plugin-proposal-class-properties',
-                                    '@babel/plugin-proposal-object-rest-spread'
-                                ]
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+  return {
+    devtool: 'cheap-module-source-map',
+    entry: dynamicEntryPoints,
+    output: {
+      filename: '[name].js',
+      path: path.resolve(__dirname, OUTPUT_SCRIPT_FOLDER),
+      publicPath: '/'
+    },
 
-        resolve: {
-            modules: ['node_modules', path.resolve(__dirname, 'js')],
-            extensions: ['.js']
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-object-rest-spread'
+                ]
+              }
+            }
+          ]
         }
-    };
+      ]
+    },
+
+    resolve: {
+      modules: ['node_modules', path.resolve(__dirname, INPUT_SCRIPT_FOLDER)],
+      extensions: ['.js', '.jsx']
+    }
+  };
 };
