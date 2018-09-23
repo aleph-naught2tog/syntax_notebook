@@ -34,18 +34,11 @@ module.exports = function (env) {
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.[tj]sx?$/,
           exclude: /node_modules/,
           use: [
             {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: [
-                  '@babel/plugin-proposal-class-properties',
-                  '@babel/plugin-proposal-object-rest-spread'
-                ]
-              }
+              loader: 'ts-loader'
             }
           ]
         }
@@ -54,7 +47,7 @@ module.exports = function (env) {
 
     resolve: {
       modules: ['node_modules', path.resolve(__dirname, INPUT_SCRIPT_FOLDER)],
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     }
   };
 };

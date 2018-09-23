@@ -1,9 +1,17 @@
 import * as React from 'react';
 
-let counter = 0;
-function globalKeyGenerator() {
-  counter = counter + 1;
-  return counter;
+function* globalKeyGenerator() {
+  let counter = 0;
+  while (true) {
+    counter = counter + 1;
+    yield counter;
+  }
+}
+
+const KeyGenerator = globalKeyGenerator();
+
+class Bob {
+  someProp = () => "hello";
 }
 
 function getRenderFunctionFor(ComponentToRender) {
@@ -15,7 +23,7 @@ function getRenderFunctionFor(ComponentToRender) {
     console.log(currentDataToRender);
     console.log(index);
     console.log(assigns);
-    const key = `render_many_${globalKeyGenerator()}`;
+    const key = `render_many_${KeyGenerator.next().value}`;
     return (
       <ComponentToRender
         index={index}
