@@ -33,13 +33,28 @@ module.exports = function (env) {
 
     module: {
       rules: [
-        { test: /\.[tj]sx?$/, loader: 'ts-loader' }
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-object-rest-spread'
+                ]
+              }
+            }
+          ]
+        }
       ]
     },
 
     resolve: {
       modules: ['node_modules', path.resolve(__dirname, INPUT_SCRIPT_FOLDER)],
-      extensions: ['.js', '.jsx', '.tsx', '.ts']
+      extensions: ['.js', '.jsx']
     }
   };
 };
