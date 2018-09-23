@@ -16,8 +16,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
     "babel-cli": "^6.26.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
@@ -26,17 +31,22 @@
     "clean-css-brunch": "2.10.0",
     "jest": "^23.6.0",
     "sass": "^1.13.1",
+    "ts-jest": "^23.10.1",
+    "ts-loader": "^5.1.1",
+    "typescript": "^3.0.3",
     "webpack": "^4.18.0",
-    "webpack-cli": "^3.1.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-react": "^7.0.0"
+    "webpack-cli": "^3.1.0"
   },
   "jest": {
     "verbose": true,
     "moduleFileExtensions": [
       "js",
-      "jsx"
-    ]
+      "jsx",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "^.+[^d]\\.(ts|tsx)$": "ts-jest"
+    }
   }
 }
