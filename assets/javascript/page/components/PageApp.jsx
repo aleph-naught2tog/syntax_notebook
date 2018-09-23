@@ -7,17 +7,6 @@ const style = `
   }
 `;
 
-function* randomGenerator() {
-  const someSpread = {apple: "apple", orange: "orange"};
-  return {...someSpread};
-}
-
-async function randomAsyncGenerator() {
-  const someSpread = {apple: "apple", orange: "orange"};
-  const bob = await fetch('apples');
-  return {...someSpread};
-}
-
 class ReadWriteInput extends React.Component {
   constructor(props) {
     super(props);
@@ -70,25 +59,44 @@ class ReadWriteInput extends React.Component {
   };
 
   render() {
-    return this.view(this.state);
+    if (this.props.wrapper) {
+      return (
+        <this.props.wrapper>
+          {this.view(this.state)}
+        </this.props.wrapper>
+      );
+    } else {
+      return this.view(this.state);
+    }
   }
 }
-
+const Div = props => {
+  console.log(props);
+  return (
+    <props.assigns.wrapper>
+      <div>
+        {props.children}
+      </div>
+    </props.assigns.wrapper>
+  );
+};
 const Headers = ({data, _updateData}) => {
   return (
     <thead>
-      <tr>
-        {data.map((datum, _index) => {
-          return (
-            <th>
-              <ReadWriteInput
-                datum={datum}
-                defaultState="read"
-              />
-            </th>
-          )
-        })}
-      </tr>
+    <tr>{renderMany(Div, ['yellow'], {wrapper: 'th', defaultState: 'read'})}</tr>
+    <tr>{renderMany(Div, ['beige', 'teal'], {wrapper: 'th', defaultState: 'read'})}</tr>
+    <tr>{renderMany(ReadWriteInput, data, {wrapper: 'th', defaultState: 'read'})}</tr>
+      {/*<tr>*/}
+        {/*{data.map((datum, _index) => {*/}
+          {/*return (*/}
+            {/*<ReadWriteInput*/}
+              {/*wrapper={'th'}*/}
+              {/*datum={datum}*/}
+              {/*defaultState="read"*/}
+            {/*/>*/}
+          {/*)*/}
+        {/*})}*/}
+      {/*</tr>*/}
     </thead>
   );
 };

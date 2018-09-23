@@ -1,15 +1,10 @@
 import * as React from 'react';
 
-function* globalKeyGenerator() {
-  let counter = 0;
-
-  while (true) {
-    counter += 1;
-    yield counter;
-  }
+let counter = 0;
+function globalKeyGenerator() {
+  counter = counter + 1;
+  return counter;
 }
-
-const KeyGenerator = globalKeyGenerator();
 
 function getRenderFunctionFor(ComponentToRender) {
   return function (
@@ -17,7 +12,10 @@ function getRenderFunctionFor(ComponentToRender) {
     index,
     assigns
   ) {
-    const key = `render_many_${KeyGenerator.next().value}`;
+    console.log(currentDataToRender);
+    console.log(index);
+    console.log(assigns);
+    const key = `render_many_${globalKeyGenerator()}`;
     return (
       <ComponentToRender
         index={index}
